@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>
+      Audit Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-menu [content]="mycontent">
+    <ion-content>
+  
+      <ion-list>
+        
+        <button ion-button round outline style="margin-top:20px; margin-left:50px; width:200px; color:#f00; font-size: 15px;" (click)="register()">Register</button>
+      </ion-list>
+  
+  
+    </ion-content>
+  </ion-menu>
+
+  <ion-nav #mycontent [root]="rootPage"></ion-nav>
+
+
+<ion-content padding>
+  <form [formGroup]="formgroup">
+    <ion-list inset>
+
+
+      <ion-item>
+        <ion-label floating>
+          Email
+        </ion-label>
+        <ion-input type="Email" formControlName="email" [(ngModel)]="emailng"> </ion-input>
+      </ion-item>
+      <ion-item *ngIf="email.hasError('required') && formgroup.controls.email.touched">
+        <p class="winput">Email is required</p>
+      </ion-item>
+      <ion-item *ngIf="formgroup.controls.email.hasError('pattern') && formgroup.controls.email.touched">
+        <p class="winput">Enter correct email format</p>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label floating>
+          Password
+        </ion-label>
+        <ion-input type="password" formControlName="password" [(ngModel)]="passwordng"> </ion-input>
+      </ion-item>
+      <ion-item *ngIf="password.hasError('required') && formgroup.controls.password.touched">
+        <p class="winput">Password is required</p>
+      </ion-item>
+      <ion-item *ngIf="formgroup.controls.password.hasError('pattern') && formgroup.controls.password.touched">
+        <p class="winput">Password should be alpha-numeric</p>
+      </ion-item>
+      <ion-item *ngIf="formgroup.controls.password.hasError('minlength') && formgroup.controls.password.touched">
+        <p class="winput">Password should not have less than 6 characters</p>
+      </ion-item>
+
+    </ion-list>
+    <br>
+    <button ion-button round outline style="color:#0f0; font-size: 15px;" (click)="signin()" [disabled]="!formgroup.valid">Submit</button>
+    <button ion-button round outline style="color:#f00; margin-left:110px; font-size: 15px;" type="reset">Reset</button>
+
+  </form>
+</ion-content>
